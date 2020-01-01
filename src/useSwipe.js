@@ -17,10 +17,10 @@ const useSwipe = ({ ref, thresholdPX = 5 }) => {
   }, [x2, y2, thresholdPX]);
 
   React.useEffect(() => {
-    const currentElement = elemRef.current;
+    const currentElement = ref.current;
     if (currentElement) {
-      elemRef.current.addEventListener('touchstart', handleTouchStart);
-      elemRef.current.addEventListener('touchend', handleTouchEnd);
+      currentElement.addEventListener('touchstart', handleTouchStart);
+      currentElement.addEventListener('touchend', handleTouchEnd);
     }
 
     return () => {
@@ -29,7 +29,7 @@ const useSwipe = ({ ref, thresholdPX = 5 }) => {
         currentElement.removeEventListener('touchend', handleTouchEnd);
       }
     }
-  }, [elemRef]);
+  }, [ref]);
 
   function handleTouchStart(event) {
     setX1(event.changedTouches[0].clientX);
