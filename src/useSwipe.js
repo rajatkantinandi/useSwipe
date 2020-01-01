@@ -14,7 +14,7 @@ const useSwipe = ({ ref, thresholdPX = 5 }) => {
       setDirection(y2 > y1 ? 'down' : 'up');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [x2, y2, thresholdPX]);
+  }, [y2]);
 
   React.useEffect(() => {
     const currentElement = ref.current;
