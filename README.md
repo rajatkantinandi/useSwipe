@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/use-swipe-hook.svg)](https://www.npmjs.com/package/use-swipe-hook)
 
-> A simple and easy to use tiny library that provides useSwipe hook to use with React that enables swipe gestures for touch screens
+> A simple and easy to use tiny library that provides useSwipe hook to use with React that enables swipe gestures for touch screens & non-touch screens via mouse events
 
 ## Install
 
@@ -23,7 +23,7 @@ function MyAwesomeComponent() {
   return (
     <div className="App">
       <h1>use-swipe-hook demo</h1>
-      <h2>Works on touch devices</h2>
+      <h2>Works on both touch & non touch devices (by dragging mouse over the container)</h2>
       <div className="swipeContainer" ref={swipeContainerRef}>
         {direction
           ? `You have swiped ${direction}`

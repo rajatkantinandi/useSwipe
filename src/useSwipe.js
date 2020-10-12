@@ -19,14 +19,26 @@ const useSwipe = ({ ref, thresholdPX = 5 }) => {
   React.useEffect(() => {
     const currentElement = ref.current;
     if (currentElement) {
-      currentElement.addEventListener('touchstart', handleTouchStart);
-      currentElement.addEventListener('touchend', handleTouchEnd);
+      if (isTouchDevice()) {
+        currentElement.addEventListener('touchstart', handleTouchStart);
+        currentElement.addEventListener('touchend', handleTouchEnd);
+      }
+      else {
+        currentElement.addEventListener('mousedown', handleMouseDown);
+        currentElement.addEventListener('mouseup', handleMouseUp);
+      }
     }
 
     return () => {
       if (currentElement) {
-        currentElement.removeEventListener('touchstart', handleTouchStart);
-        currentElement.removeEventListener('touchend', handleTouchEnd);
+        if (isTouchDevice()) {
+          currentElement.removeEventListener('touchstart', handleTouchStart);
+          currentElement.removeEventListener('touchend', handleTouchEnd);
+        }
+        else {
+          currentElement.removeEventListener('mousedown', handleMouseDown);
+          currentElement.removeEventListener('mouseup', handleMouseUp);
+        }
       }
     }
   }, [ref]);
@@ -43,7 +55,19 @@ const useSwipe = ({ ref, thresholdPX = 5 }) => {
     }
   }
 
+  function handleMouseDown(event) {
+    setX1(event.clientX);
+    setY1(event.clientY);
+  }
+
+  function handleMouseUp(event) {
+    setX2(event.clientX);
+    setY2(event.clientY);
+  }
+
   return direction;
-}
+};
+
+const isTouchDevice = () => ('ontouchstart' in window);
 
 export default useSwipe;
