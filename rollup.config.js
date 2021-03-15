@@ -1,11 +1,11 @@
-import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
-import resolve from "rollup-plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
 import external from "rollup-plugin-peer-deps-external";
 import { terser } from "rollup-plugin-terser";
+import typescript from 'rollup-plugin-typescript2';
 import packageJSON from "./package.json";
 
-const input = "./src/index.js";
+const input = "./src/index.ts";
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, ".min.js");
 
 export default [
@@ -23,13 +23,13 @@ export default [
       sourcemap: true
     },
     plugins: [
-      babel({
-        exclude: "node_modules/**"
+      typescript({
+        exclude: ["node_modules/**", "lib/**"]
       }),
       external(),
       resolve(),
       commonjs()
-    ]
+    ],
   },
   {
     input,
@@ -44,13 +44,13 @@ export default [
       }
     },
     plugins: [
-      babel({
-        exclude: "node_modules/**"
+      typescript({
+        exclude: ["node_modules/**", "lib/**"]
       }),
       external(),
       resolve(),
       commonjs(),
       terser()
-    ]
+    ],
   },
 ];
