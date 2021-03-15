@@ -12,9 +12,9 @@ npm i use-swipe-hook
 
 ## Usage
 
-``` jsx
-import React, { useRef } from "react";
-import { useSwipe } from "use-swipe-hook";
+``` tsx
+import React, { useRef } from 'react';
+import { useSwipe } from 'use-swipe-hook';
 
 function MyAwesomeComponent() {
   const swipeContainerRef = useRef();
@@ -27,7 +27,7 @@ function MyAwesomeComponent() {
       <div className="swipeContainer" ref={swipeContainerRef}>
         {direction
           ? `You have swiped ${direction}`
-          : "Swipe here to see swipe direction"
+          : 'Swipe here to see swipe direction'
         }
       </div>
     </div>
@@ -35,14 +35,27 @@ function MyAwesomeComponent() {
 }
 ```
 
-## Params
+## Structure
 
-- __ref__: ref of the container where you want to attach swipe event
-- __thresholdPX__(*optional*): no of pixels to move your finger to trigger a swipe event. More this value means less sensitivity. Default value is 5px.
+```ts
+// SWIPE_DIRECTION can be imported & used for comparison
+enum SWIPE_DIRECTION {
+    RIGHT = "right",
+    LEFT = "left",
+    UP = "up",
+    DOWN = "down"
+}
 
-## Returned value
+interface UseRefOptions {
+    // ref of the container where you want to attach swipe event
+    ref: RefObject<HTMLElement>;
+    // (optional) no of pixels to move your finger to trigger a swipe event. 
+    // Larger this value means less sensitivity. Default value is 5 (5px)
+    thresholdPX?: number; 
+};
 
-- __direction__: "left" | "right" | "up" | "down"
+const useSwipe: ({ ref, thresholdPX }: UseRefOptions) => SWIPE_DIRECTION | null
+```
 
 ## Demo
 [Codesandbox demo](https://codesandbox.io/s/fervent-volhard-xk4mv?fontsize=14&hidenavigation=1&theme=dark)
