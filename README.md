@@ -13,26 +13,33 @@ npm i use-swipe-hook
 ## Usage
 
 ``` tsx
-import React, { useRef } from 'react';
-import { useSwipe } from 'use-swipe-hook';
+import React, { useRef } from "react";
+import ReactDOM from "react-dom";
+import "./styles.css";
+import { useSwipe } from "use-swipe-hook";
 
-function MyAwesomeComponent() {
-  const swipeContainerRef = useRef();
+function App() {
+  const swipeContainerRef = useRef<HTMLDivElement>(null);
   const direction = useSwipe({ ref: swipeContainerRef, thresholdPX: 5 });
 
   return (
     <div className="App">
       <h1>use-swipe-hook demo</h1>
-      <h2>Works on both touch & non touch devices (by dragging mouse over the container)</h2>
+      <h2>
+        Works on both touch & non touch devices (by dragging mouse over the
+        container)
+      </h2>
       <div className="swipeContainer" ref={swipeContainerRef}>
         {direction
           ? `You have swiped ${direction}`
-          : 'Swipe here to see swipe direction'
-        }
+          : "Swipe here to see swipe direction"}
       </div>
     </div>
   );
 }
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
 ```
 
 ## Structure
