@@ -1,7 +1,7 @@
 import { RefObject, useState, useEffect } from 'react';
 
 // SWIPE_DIRECTION can be imported & used for comparison
-enum SWIPE_DIRECTION {
+export enum SWIPE_DIRECTION {
   RIGHT = "right",
   LEFT = "left",
   UP = "up",
