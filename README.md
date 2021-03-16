@@ -67,4 +67,9 @@ const useSwipe: ({ ref, thresholdPX }: UseRefOptions) => SWIPE_DIRECTION | null
 ## Demo
 [Codesandbox demo](https://codesandbox.io/s/fervent-volhard-xk4mv?fontsize=14&hidenavigation=1&theme=dark)
 
+## Actions
+This repo uses github actions to publish a package when a new release is created or a new pull request is merged to master or can be triggered manually.
+When a pull request is merged or something is pushed to master then if src folder has file changes then only it will publish a version.
+Also while running the action one needs to increment the version number in package.json before merging the PR.
+
 © [rajatkantinandi](https://github.com/rajatkantinandi)
