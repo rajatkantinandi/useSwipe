@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - 'src/**'
-      - '.github/workflows/npm-publish.yaml'
+      - '.github/workflows/npm-publish.yml'
   release:
   workflow_dispatch:
 
