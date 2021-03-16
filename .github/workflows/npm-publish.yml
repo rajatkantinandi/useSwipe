@@ -14,17 +14,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
-      - run: npm test
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -33,20 +37,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install
         run: npm ci
-      - name: Build
-        if: github.ref != 'refs/heads/master'
-        run: npm run build
       - name: Publish
-        if: github.ref == 'refs/heads/master'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
