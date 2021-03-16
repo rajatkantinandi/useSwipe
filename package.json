@@ -1,6 +1,6 @@
 {
   "name": "use-swipe-hook",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A simple and easy to use tiny library that provides useSwipe hook to use with React that enables swipe gestures for touch screens",
   "main": "lib/index.js",
   "browser": "lib/index.js",
