@@ -8,7 +8,7 @@ export enum SWIPE_DIRECTION {
   DOWN = "down"
 }
 
-interface UseRefOptions {
+interface UseSwipeOptions {
     // ref of the container where you want to attach swipe event
     ref: RefObject<HTMLElement>;
     // (optional) no of pixels to move your finger to trigger a swipe event. 
@@ -16,7 +16,7 @@ interface UseRefOptions {
     thresholdPX?: number; 
 };
 
-const useSwipe = ({ ref, thresholdPX = 5 }: UseRefOptions) => {
+const useSwipe = ({ ref, thresholdPX = 5 }: UseSwipeOptions) => {
   const [x1, setX1] = useState(0);
   const [y1, setY1] = useState(0);
   const [x2, setX2] = useState(0);
