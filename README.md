@@ -67,9 +67,15 @@ const useSwipe: ({ ref, thresholdPX }: UseRefOptions) => SWIPE_DIRECTION | null
 ## Demo
 [Codesandbox demo](https://codesandbox.io/s/fervent-volhard-xk4mv?fontsize=14&hidenavigation=1&theme=dark)
 
-## Actions
-This repo uses github actions to publish a package when a new release is created or a new pull request is merged to master or can be triggered manually.
-When a pull request is merged or something is pushed to master then if src folder has file changes then only it will publish a version.
-Also while running the action one needs to increment the version number in package.json before merging the PR.
+## GitHub actions for type-checking, building & auto-publish
+This repo uses github actions to publish a package when: 
+- a new release is created
+- a new pull request is merged to master
+  - When a pull request is merged or something is pushed to master then if src folder has file changes then only it will publish a version. 
+  - Additionally the merge commit message should contain `[publish]` keyword otherwise it will not publish on merge & just do build time checks.
+  - Also while running the action one needs to increment the version number in package.json before merging the PR otherwise the `npm publish` command will fail.
+- can be triggered manually.
+
+On any other branch commits it will run type-check & build checks if src folder files are changed.
 
 © [rajatkantinandi](https://github.com/rajatkantinandi)
