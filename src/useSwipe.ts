@@ -4,10 +4,10 @@ import useSwipePosition from './useSwipePosition';
 
 // SWIPE_DIRECTION can be imported & used for comparison
 export enum SWIPE_DIRECTION {
-  RIGHT = "right",
-  LEFT = "left",
-  UP = "up",
-  DOWN = "down"
+  RIGHT = 'right',
+  LEFT = 'left',
+  UP = 'up',
+  DOWN = 'down',
 }
 
 const useSwipe = ({ ref, thresholdPX = 5 }: UseSwipeOptions) => {
