@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UseSwipeOptions } from './types';
 
-const useSwipePosition = ({ ref }: UseSwipeOptions) => {
+const useSwipePosition = ({ ref, useRelativeUnits = false }: UseSwipeOptions) => {
   const [x1, setX1] = useState(0);
   const [y1, setY1] = useState(0);
   const [x2, setX2] = useState(0);
@@ -14,8 +14,7 @@ const useSwipePosition = ({ ref }: UseSwipeOptions) => {
       if (isTouchDevice()) {
         currentElement.addEventListener('touchstart', handleTouchStart);
         currentElement.addEventListener('touchend', handleTouchEnd);
-      }
-      else {
+      } else {
         currentElement.addEventListener('mousedown', handleMouseDown);
         currentElement.addEventListener('mouseup', handleMouseUp);
       }
@@ -26,13 +25,12 @@ const useSwipePosition = ({ ref }: UseSwipeOptions) => {
         if (isTouchDevice()) {
           currentElement.removeEventListener('touchstart', handleTouchStart);
           currentElement.removeEventListener('touchend', handleTouchEnd);
-        }
-        else {
+        } else {
           currentElement.removeEventListener('mousedown', handleMouseDown);
           currentElement.removeEventListener('mouseup', handleMouseUp);
         }
       }
-    }
+    };
   }, [ref]);
 
   function handleTouchStart(event: TouchEvent) {
@@ -48,18 +46,33 @@ const useSwipePosition = ({ ref }: UseSwipeOptions) => {
   }
 
   function handleMouseDown(event: MouseEvent) {
-    setX1(event.clientX);
-    setY1(event.clientY);
+    const { x, y } = getDimensionsFromEvent(event);
+    setX1(x);
+    setY1(y);
   }
 
   function handleMouseUp(event: MouseEvent) {
-    setX2(event.clientX);
-    setY2(event.clientY);
+    const { x, y } = getDimensionsFromEvent(event);
+    setX2(x);
+    setY2(y);
+  }
+
+  function getDimensionsFromEvent(event: MouseEvent) {
+    let x = event.clientX,
+      y = event.clientY;
+
+    if (useRelativeUnits && ref.current) {
+      const { top, left } = ref.current.getBoundingClientRect();
+      x -= left;
+      y -= top;
+    }
+
+    return { x, y };
   }
 
   return { x1, y1, x2, y2 };
 };
 
-const isTouchDevice = () => ('ontouchstart' in window);
+const isTouchDevice = () => 'ontouchstart' in window;
 
 export default useSwipePosition;

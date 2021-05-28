@@ -3,5 +3,5 @@ export function square(x: number) {
 }
 
 export function radToDeg(x: number) {
-  return x * 360 / Math.PI;
+  return (x * 180) / Math.PI;
 }
