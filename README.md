@@ -173,7 +173,6 @@ const useSwipePosition: ({ ref, thresholdPX, useRelativeUnits }: UseSwipePositio
 
 This repo uses github actions to publish a package when:
 
-- a new release is created
 - a new pull request is merged to master
   - When a pull request is merged or something is pushed to master then if src folder has file changes then only it will publish a version.
   - Additionally the merge commit message should contain `[publish]` keyword otherwise it will not publish on merge & just do build time checks.
