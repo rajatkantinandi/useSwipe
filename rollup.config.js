@@ -1,17 +1,17 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
+import terser from '@rollup/plugin-terser';
 import external from "rollup-plugin-peer-deps-external";
-import { terser } from "rollup-plugin-terser";
 import typescript from 'rollup-plugin-typescript2';
 import packageJSON from "./package.json";
 
 const input = "./src/index.ts";
 const inputDir = [
-  "./src/index.ts", 
-  "./src/helper.ts", 
-  "./src/useSwipe.ts", 
-  "./src/useSwipePosition.ts", 
-  "./src/useSwipeVector.ts", 
+  "./src/index.ts",
+  "./src/helper.ts",
+  "./src/useSwipe.ts",
+  "./src/useSwipePosition.ts",
+  "./src/useSwipeVector.ts",
   "./src/types.ts",
 ];
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, ".min.js");
