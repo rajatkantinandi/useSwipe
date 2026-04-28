@@ -13,12 +13,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && !(github.ref == 'refs/heads/master' && contains(github.event.head_commit.message, '[publish'))
+    if: github.event_name == 'push' && github.ref != 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 12
+          node-version: 22
       - name: Install
         run: npm ci
       - name: Build
@@ -28,10 +28,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' && (github.event_name != 'push' || contains(github.event.head_commit.message, '[publish]'))
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 12
+          node-version: 22
           registry-url: https://registry.npmjs.org/
       - name: Install
         run: npm ci
@@ -44,10 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' && github.event_name == 'push' && contains(github.event.head_commit.message, '[publish-beta]')
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 12
+          node-version: 22
           registry-url: https://registry.npmjs.org/
       - name: Install
         run: npm ci
