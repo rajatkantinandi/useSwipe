@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/rajatkantinandi/useSwipe#readme",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@rollup/plugin-terser": "^1.0.0",
     "@types/react": "^16.9.2",
